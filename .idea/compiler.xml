@@ -12,6 +12,8 @@
       <entry name="!?*.clj" />
     </wildcardResourcePatterns>
     <bytecodeTargetLevel target="1.8">
+      <module name="oldstuff_main" target="1.8" />
+      <module name="oldstuff_test" target="1.8" />
       <module name="spring-int_main" target="1.8" />
       <module name="spring-int_test" target="1.8" />
       <module name="spring-jpa_main" target="1.8" />

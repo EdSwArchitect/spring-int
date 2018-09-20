@@ -10,7 +10,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/elastic" />
-            <option value="$PROJECT_DIR$/oldstuff" />
             <option value="$PROJECT_DIR$/sb-web-service" />
             <option value="$PROJECT_DIR$/spring-brooklyn" />
             <option value="$PROJECT_DIR$/spring-com.bscllc.jpa" />
