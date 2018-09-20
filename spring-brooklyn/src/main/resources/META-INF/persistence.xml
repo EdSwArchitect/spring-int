@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+    <persistence-unit name="bscllc">
+        <description>JPA Demo</description>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.bscllc.springjpa.brooklyn.entities.BrooklynBridge</class>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="none"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <!--
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://eddbinstance.c9jzbyfycpl0.us-east-1.rds.amazonaws.com:3306/eddatabase"/>
+            <property name="javax.persistence.jdbc.user" value="edwinbrown"/>
+            <property name="javax.persistence.jdbc.password" value="fJaDFJdfjbe5"/>
+            -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://darkstarinstance.c9jzbyfycpl0.us-east-1.rds.amazonaws.com:3306/dblearning"/>
+            <property name="javax.persistence.jdbc.user" value="edwinbrown"/>
+            <property name="javax.persistence.jdbc.password" value="MPT5npChtsCQ"/>
+        </properties>
+    </persistence-unit>
+</persistence>

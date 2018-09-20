@@ -1,0 +1,7 @@
+filebeat.prospectors:
+- type: log
+  paths:
+    - C:\dev\data\*.csv
+output.logstash:
+  hosts: ["localhost:5044"]
+  

@@ -1,0 +1,56 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.3.RELEASE")
+    }
+}
+
+
+plugins {
+    id 'java'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+
+group 'com.com.bscllc'
+version '1.0-SNAPSHOT'
+bootJar {
+    baseName = 'gs-actuator-service'
+    version =  '0.1.0'
+}
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+task getDeps(type: Copy) {
+    from sourceSets.main.runtimeClasspath
+    into 'runtime/'
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-data-com.bscllc.jpa")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+//    compile("com.fasterxml.jackson.core:jackson-databind")
+// https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api
+    compile group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
+
+    compile("com.h2database:h2")
+
+// https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
+//    compile group: 'org.springframework.data', name: 'spring-data-com.bscllc.jpa', version: '2.0.9.RELEASE'
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

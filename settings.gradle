@@ -1,0 +1,9 @@
+rootProject.name = 'spring-int'
+include 'oldstuff'
+include 'sb-web-service'
+include 'spring-rest'
+include 'spring-com.bscllc.jpa'
+include 'spring-mysql-amazon'
+include 'spring-brooklyn'
+include 'elastic'
+
