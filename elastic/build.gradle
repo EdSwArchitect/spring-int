@@ -1,9 +1,23 @@
-plugins {
-    id 'groovy'
-    id 'java'
-}
+//buildscript {
+//    repositories {
+//        mavenCentral()
+//    }
+//    dependencies {
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.3.RELEASE")
+//    }
+//}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+//apply plugin: 'org.springframework.boot'
+//apply plugin: 'io.spring.dependency-management'
 
 version '1.0-SNAPSHOT'
+
+//bootJar {
+//    baseName = 'gs-brooklyn-ws'
+//    version =  '0.1.0'
+//}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -19,15 +33,10 @@ task getDeps(type: Copy) {
 }
 
 dependencies {
-// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-// https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
     compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
-// https://mvnrepository.com/artifact/org.elasticsearch.client/transport
-    compile group: 'org.elasticsearch.client', name: 'transport', version: '6.4.0'
-// https://mvnrepository.com/artifact/com.univocity/univocity-parsers
+    compile group: 'org.elasticsearch.client', name: 'transport', version: '6.4.1'
     compile group: 'com.univocity', name: 'univocity-parsers', version: '2.7.5'
 
-    compile 'org.codehaus.groovy:groovy-all:2.3.11'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

@@ -39,8 +39,9 @@ public class LoadBrooklyn {
 
             // creates a parser instance with the given settings
             CsvParser parser = new CsvParser(parserSettings);
+//            FileInputStream fis = new FileInputStream("C:/DEV/data/small_brooklyn.csv");
 
-            FileInputStream fis = new FileInputStream("C:/DEV/data/small_brooklyn.csv");
+            FileInputStream fis = new FileInputStream("C:/DEV/data/brooklyn-bridge.csv");
             InputStreamReader reader = new InputStreamReader(fis);
 
             parser.parse(reader);
@@ -67,10 +68,10 @@ public class LoadBrooklyn {
                 bulkRequest.add(client.prepareIndex(args[1], "doc")
                         .setSource(jsonBuilder()
                                 .startObject()
-                                .field("Towards Brooklyn", line.getTowardsBrooklyn())
+                                .field("towards_brooklyn", line.getTowardsBrooklyn())
                                 .field("location", line.getLocation())
                                 .field("lat", line.getLat())
-                                .field("Towawrds Manhattan", line.getTowardsManhattan())
+                                .field("towards_manhattan", line.getTowardsManhattan())
                                 .field("@timestamp", line.getHourBeginning())
                                 .field("weather_summary", line.getWeatherSummary())
                                 .field("temperature", line.getTemperature())
