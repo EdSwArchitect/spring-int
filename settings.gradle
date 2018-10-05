@@ -5,4 +5,7 @@ include 'spring-com.bscllc.jpa'
 include 'spring-mysql-amazon'
 include 'spring-brooklyn'
 include 'elastic'
+include 'spring-es'
+include 'spring-es'
+include 'consul-client'
 

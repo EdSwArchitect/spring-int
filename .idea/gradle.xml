@@ -9,10 +9,12 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/consul-client" />
             <option value="$PROJECT_DIR$/elastic" />
             <option value="$PROJECT_DIR$/sb-web-service" />
             <option value="$PROJECT_DIR$/spring-brooklyn" />
             <option value="$PROJECT_DIR$/spring-com.bscllc.jpa" />
+            <option value="$PROJECT_DIR$/spring-es" />
             <option value="$PROJECT_DIR$/spring-mysql-amazon" />
             <option value="$PROJECT_DIR$/spring-rest" />
           </set>
