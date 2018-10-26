@@ -1,0 +1,15 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: brooklyn-frontend
+  cloud:
+    consul:
+      discovery:
+        healthCheckPath: /health
+        healthCheckInterval: 15s
+        instanceId: ${spring.application.name}-${random.value}
+        tags: name=frontend
+      host: ec2-54-86-255-134.compute-1.amazonaws.com
+      port: 8500

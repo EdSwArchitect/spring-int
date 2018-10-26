@@ -1,5 +1,11 @@
 package com.bscllc.elastic.spring;
 
+import com.bscllc.elastic.ESBrooklyn;
+import com.bscllc.elastic.ESTop;
+import com.bscllc.elastic.Hit;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -114,7 +120,7 @@ public class SearchBrooklyn {
      * @param size
      * @return
      */
-    public List<HashMap<String, Object>> searchAll(int start, int size) {
+    public List<ESBrooklyn> searchAll(int start, int size) {
         StringBuffer buf = new StringBuffer();
 
         try {
@@ -165,12 +171,69 @@ public class SearchBrooklyn {
         return getHits(buf.toString());
     }
 
+
     /**
      * @param start
      * @param size
      * @return
      */
-    public List<HashMap<String, Object>> searchByEvent(String event, int start, int size) {
+    public String searchAllString(int start, int size) {
+        StringBuffer buf = new StringBuffer();
+
+        try {
+
+            StringBuilder query = new StringBuilder();
+            query.append("{\n").append("\"query\": {\n").append("\"match_all\": {}\n}\n}");
+
+            // "http://ec2-35-174-167-234.compute-1.amazonaws.com:9200/mybrooklyn/_search?from=100&size=150");
+
+            HttpGetWithBody getWithBody = new HttpGetWithBody();
+
+            getWithBody.setEntity((new ByteArrayEntity(query.toString().getBytes("UTF-8"))));
+            getWithBody.setURI(new URI("http://" + hostname + ":9200/" + index + "/_search?from=" + start + "&size=" + size));
+            getWithBody.addHeader("Accept", "application/json");
+            getWithBody.addHeader("Content-Type", "application/json");
+
+            CloseableHttpClient httpclient = HttpClients.createDefault();
+
+            HttpResponse resp = httpclient.execute(getWithBody);
+            HttpEntity entity = null;
+
+            resp = httpclient.execute(getWithBody);
+
+            System.out.println("Status line: " + resp.getStatusLine());
+
+            entity = resp.getEntity();
+
+            InputStream instream = entity.getContent();
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(instream));
+            String line;
+
+            while ((line = in.readLine()) != null) {
+                buf.append(line).append('\n');
+            } // while ((line = in.readLine()) != null) {
+
+
+            EntityUtils.consume(entity);
+            httpclient.close();
+
+        } //
+        catch (IOException ioe) {
+            log.error("IO Exception", ioe);
+        } catch (URISyntaxException urise) {
+            log.error("URI Exception", urise);
+        }
+
+        return buf.toString();
+    }
+
+    /**
+     * @param start
+     * @param size
+     * @return
+     */
+    public List<ESBrooklyn> searchByEvent(String event, int start, int size) {
         StringBuffer buf = new StringBuffer();
 
         try {
@@ -226,7 +289,7 @@ public class SearchBrooklyn {
     }
 
     // 2017-11-24T12:00:00.000Z
-    public List<HashMap<String, Object>> searchByDateRnage(Date startDate, Date endDate, int start, int size) {
+    public List<ESBrooklyn> searchByDateRange(Date startDate, Date endDate, int start, int size) {
         StringBuffer buf = new StringBuffer();
 
         String sd = sdf.format(startDate);
@@ -296,7 +359,7 @@ public class SearchBrooklyn {
     public void close() {
     }
 
-    private List<HashMap<String, Object>>getHits(String results) {
+    private List<HashMap<String, Object>>getHitsAsMap(String results) {
         ArrayList<HashMap<String, Object>>list = new ArrayList<>();
 
         if (results != null) {
@@ -312,6 +375,7 @@ public class SearchBrooklyn {
                 ArrayList<HashMap<String, Object>> hitsList = (ArrayList<HashMap<String, Object>>)dahHits;
 
                 for (HashMap<String, Object> item : hitsList) {
+
                     HashMap<String, Object> source = (HashMap<String, Object>)item.get("_source");
 
                     list.add(source);
@@ -325,4 +389,34 @@ public class SearchBrooklyn {
         } // if (results != null) {
         return list;
     }
+
+    private List<ESBrooklyn> getHits(String results) {
+        ArrayList<ESBrooklyn> list = new ArrayList<ESBrooklyn>();
+
+        if (results != null) {
+            ObjectMapper mapper = new ObjectMapper();
+
+            JsonFactory jf = null;
+            try {
+                JsonParser parser  = new JsonFactory().createParser(results);
+
+                MappingIterator<ESTop> iterator = mapper.readValues(parser, ESTop.class);
+
+                while (iterator.hasNextValue()) {
+                    ESTop top = iterator.nextValue();
+
+                    Hit[] hits = top.getHits().getHits();
+
+                    for (Hit hit : hits) {
+                        list.add(hit.get_source());
+                    } // for (Hit hit : hits) {
+                } // while (iterator.hasNextValue()) {
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } // if (results != null) {
+        return list;
+    }
+
 }

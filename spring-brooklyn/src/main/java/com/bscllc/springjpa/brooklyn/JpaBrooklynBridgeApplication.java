@@ -6,10 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BrooklynBridgeApplication {
-    private static final Logger log = LoggerFactory.getLogger(BrooklynBridgeApplication.class);
+public class JpaBrooklynBridgeApplication {
+    private static final Logger log = LoggerFactory.getLogger(JpaBrooklynBridgeApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(BrooklynBridgeApplication.class, args);
+        SpringApplication.run(JpaBrooklynBridgeApplication.class, args);
     }
 }

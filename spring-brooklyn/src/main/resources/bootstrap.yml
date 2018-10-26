@@ -1,0 +1,15 @@
+server:
+  port: 8443
+
+spring:
+  application:
+    name: jpa-brooklyn-bridge
+  cloud:
+    consul:
+      discovery:
+        healthCheckPath: /health
+        healthCheckInterval: 15s
+        instanceId: ${spring.application.name}-${random.value}
+        tags: name=jpa-brooklyn, backend=mysql
+      host: ec2-54-86-255-134.compute-1.amazonaws.com
+      port: 8500

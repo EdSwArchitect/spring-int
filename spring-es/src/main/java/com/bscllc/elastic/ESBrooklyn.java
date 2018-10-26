@@ -1,7 +1,7 @@
 package com.bscllc.elastic;
 
-import com.univocity.parsers.annotations.Format;
-import com.univocity.parsers.annotations.Parsed;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 import java.util.Objects;
@@ -9,35 +9,35 @@ import java.util.Objects;
 /**
  * ["hour_beginning","location","Pedestrians","Towards Manhattan","Towards Brooklyn","weather_summary","temperature","precipitation","lat","lon","events"]
  */
-public class Brooklyn {
-    @Parsed(field="hour_beginning")
-    @Format(formats = {"M/d/yyyy HH:mm"})
+public class ESBrooklyn {
+    @JsonProperty ("@timestamp")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date hourBeginning;
-    @Parsed(field="location")
+    @JsonProperty("location")
     private String location;
-    @Parsed(field="Pedestrians")
+    @JsonProperty("Pedestrians")
     private long pedestrians;
-    @Parsed(field="towards_manhattan")
-    private long towardsManhattan;
-    @Parsed(field="towards_brooklyn")
-    private long towardsBrooklyn;
-    @Parsed(field="weather_summary")
+    @JsonProperty("towards_manhattan")
+    private long towards_manhattan;
+    @JsonProperty("towards_brooklyn")
+    private long towards_brooklyn;
+    @JsonProperty("weather_summary")
     private String weatherSummary;
-    @Parsed(field="temperature")
+    @JsonProperty("temperature")
     private int temperature;
-    @Parsed(field="precipitation")
+    @JsonProperty("precipitation")
     private double precipitation;
-    @Parsed(field="lat")
+    @JsonProperty("lat")
     private double lat;
-    @Parsed(field="long")
+    @JsonProperty("lon")
     private double lon;
-    @Parsed(field="events")
+    @JsonProperty("events")
     private String events;
 
     /**
      *
      */
-    public Brooklyn() {
+    public ESBrooklyn() {
 
     }
 
@@ -65,20 +65,20 @@ public class Brooklyn {
         this.pedestrians = pedestrians;
     }
 
-    public long getTowardsManhattan() {
-        return towardsManhattan;
+    public long getTowards_manhattan() {
+        return towards_manhattan;
     }
 
-    public void setTowardsManhattan(long towardsManhattan) {
-        this.towardsManhattan = towardsManhattan;
+    public void setTowards_manhattan(long towards_manhattan) {
+        this.towards_manhattan = towards_manhattan;
     }
 
-    public long getTowardsBrooklyn() {
-        return towardsBrooklyn;
+    public long getTowards_brooklyn() {
+        return towards_brooklyn;
     }
 
-    public void setTowardsBrooklyn(long towardsBrooklyn) {
-        this.towardsBrooklyn = towardsBrooklyn;
+    public void setTowards_brooklyn(long towards_brooklyn) {
+        this.towards_brooklyn = towards_brooklyn;
     }
 
     public String getWeatherSummary() {
@@ -133,10 +133,10 @@ public class Brooklyn {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Brooklyn brooklyn = (Brooklyn) o;
+        ESBrooklyn brooklyn = (ESBrooklyn) o;
         return pedestrians == brooklyn.pedestrians &&
-                towardsManhattan == brooklyn.towardsManhattan &&
-                towardsBrooklyn == brooklyn.towardsBrooklyn &&
+                towards_manhattan == brooklyn.towards_manhattan &&
+                towards_brooklyn == brooklyn.towards_brooklyn &&
                 temperature == brooklyn.temperature &&
                 Double.compare(brooklyn.precipitation, precipitation) == 0 &&
                 Double.compare(brooklyn.lat, lat) == 0 &&
@@ -149,23 +149,23 @@ public class Brooklyn {
 
     @Override
     public int hashCode() {
-        return Objects.hash(hourBeginning, location, pedestrians, towardsManhattan, towardsBrooklyn, weatherSummary, temperature, precipitation, lat, lon, events);
+        return Objects.hash(hourBeginning, location, pedestrians, towards_manhattan, towards_brooklyn, weatherSummary, temperature, precipitation, lat, lon, events);
     }
 
-    @Override
-    public String toString() {
-        return "Brooklyn{" +
-                "hourBeginning=" + hourBeginning +
-                ", location='" + location + '\'' +
-                ", pedestrians=" + pedestrians +
-                ", towardsManhattan=" + towardsManhattan +
-                ", towardsBrooklyn=" + towardsBrooklyn +
-                ", weatherSummary='" + weatherSummary + '\'' +
-                ", temperature=" + temperature +
-                ", precipitation=" + precipitation +
-                ", lat=" + lat +
-                ", lon=" + lon +
-                ", events='" + events + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "ESBrooklyn{" +
+//                "hourBeginning=" + hourBeginning +
+//                ", location='" + location + '\'' +
+//                ", pedestrians=" + pedestrians +
+//                ", towards_manhattan=" + towards_manhattan +
+//                ", towards_brooklyn=" + towards_brooklyn +
+//                ", weatherSummary='" + weatherSummary + '\'' +
+//                ", temperature=" + temperature +
+//                ", precipitation=" + precipitation +
+//                ", lat=" + lat +
+//                ", lon=" + lon +
+//                ", events='" + events + '\'' +
+//                '}';
+//    }
 }

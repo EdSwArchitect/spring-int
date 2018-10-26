@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: es-brooklyn
+  cloud:
+    consul:
+      discovery:
+        healthCheckPath: /health
+        healthCheckInterval: 15s
+        instanceId: ${spring.application.name}-${random.value}
+        tags: name=es-brooklyn, backend=elastic search
+      host: ec2-52-91-6-153.compute-1.amazonaws.com
+      port: 8500
+

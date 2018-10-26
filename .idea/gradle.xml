@@ -9,6 +9,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/brooklyn-frontend" />
             <option value="$PROJECT_DIR$/consul-client" />
             <option value="$PROJECT_DIR$/elastic" />
             <option value="$PROJECT_DIR$/sb-web-service" />

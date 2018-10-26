@@ -8,4 +8,5 @@ include 'elastic'
 include 'spring-es'
 include 'spring-es'
 include 'consul-client'
+include 'brooklyn-frontend'
 
