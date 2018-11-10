@@ -1,0 +1,11 @@
+{
+    "bootstrap": false,
+    "server": true,
+    "datacenter": "edwin",
+    "domain": "edwindomain",
+    "data_dir": "/var/consul/data-dir",
+    "log_level": "DEBUG",
+    "enable_syslog": false,
+    "leave_on_terminate" : true,
+    "rejoin_after_leave" : true
+}
